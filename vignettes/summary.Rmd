@@ -19,5 +19,13 @@ nodeSet <- get_blogs_set(filename)
 df <- blogs_set_as_df(nodeSet)
 
 print(df)
+```
+
+```{r stats}
+mes <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
+msg <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
+```
+
+```{r merge}
 
 ```

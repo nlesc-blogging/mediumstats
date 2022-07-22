@@ -65,7 +65,7 @@ blogs_set_as_df <- function(blogs_set, collapse=" ") {
     # Category returns a list. We turn it into a string
     blog |> get_values('category') |> paste(collapse = collapse) -> category
 
-    df <- rbind(df, list(guid = guid,
+    df <- rbind(df, list(id = guid,
                          title = title,
                          category = category))
   }
