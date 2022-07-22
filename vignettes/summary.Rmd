@@ -1,0 +1,52 @@
+---
+title: "Blog summary"
+author: "Pablo Rodríguez"
+date: '2022-07-22'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r working-script}
+rm(list = ls())
+library(xml2)
+library(tibble)
+library(tidyr)
+library(XML)
+
+
+## Our case
+source <- '../data/feed.xml'
+raw <- read_xml(source)
+
+query <- './/channel/item' # Each blog has lives in its own 'item' entry
+raw |> xml_find_all(query) -> nodeSet
+
+get_values <- function(node, key) {
+  node |> xml_find_all(key) |> xml_text() -> values
+  return(values)
+}
+
+simplify_id <- function(string) {
+  gsub('https://medium.com/p/', '', string)
+}
+
+# Build data frame
+df <- data.frame()
+for (i in seq(1, length(nodeSet))) {
+  node <- nodeSet[[i]]
+  node |> get_values('title') -> title
+  node |> get_values('guid') |> simplify_id()-> guid
+  
+  # Category returns a list. We turn it into a string
+  node |> get_values('category') |> paste(collapse = " ") -> category
+  
+  df <- rbind(df, list(guid = guid,
+                       title = title,
+                       category = category))
+}
+df
+
+```
