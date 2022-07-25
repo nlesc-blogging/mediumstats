@@ -1,3 +1,16 @@
+#' Download the online feed and make a local copy
+#'
+#' @param url The url containing the feed
+#' @param destfile The destination file
+#'
+#' @return Nothing, but downloads the file
+#' @export
+#'
+#' @examples
+download_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='data/temp.xml') {
+  download.file(url = url, destfile = destfile)
+}
+
 #' Get blogs tree set
 #'
 #' Each blog is coded as a subtree
@@ -37,7 +50,6 @@ get_values <- function(node, key) {
 #' @param string The medium id, typically: https://medium.com/p/<simple id>
 #'
 #' @return A simplified id
-#' @export
 #'
 #' @examples
 simplify_id <- function(string) {

@@ -12,8 +12,9 @@ library(mediumstats)
 
 
 ```{r rss}
-filename <- '../data/feed.xml' # Available here: https://blog.esciencecenter.nl/feed
-nodeSet <- get_blogs_set(filename)
+filename <- '../data/temp.xml'
+download_feed(destfile = filename)
+nodeSet <- get_blogs_set(source = filename)
 
 # Build data frame
 df <- blogs_set_as_df(nodeSet)
