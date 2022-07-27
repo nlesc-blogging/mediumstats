@@ -13,9 +13,7 @@ library(mediumstats)
 
 ```{r rss}
 # Build data frame
-get_feed(destfile = '../data/temp.xml') |> 
-  get_blogs_set() |> 
-  blogs_set_as_df() -> df
+df <- blogs_set_as_df()
 
 print(df)
 ```
