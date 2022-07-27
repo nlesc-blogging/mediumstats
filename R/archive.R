@@ -25,7 +25,6 @@ update_labels_archive <- function(inspect=FALSE) {
   if (inspect) { # This is useful for debug
     return(updated)
   } else { # This is the default behaviour
-    unlink('data/labels_archive.rda')
-    save(updated, file = 'data/labels_archive.Rda')
+    save(updated, file = 'data/labels_archive.rda')
   }
 }
