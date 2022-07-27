@@ -11,11 +11,35 @@ download_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='d
   download.file(url = url, destfile = destfile)
 }
 
+#' Get the online feed
+#'
+#' @param url The url containing the feed
+#' @param destfile The destination file
+#' @param clean Delete destination file after reading it
+#'
+#' @return A string containing the feed
+#' @export
+#'
+get_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='data/temp.xml', clean=TRUE) {
+  # Save the feed as a file
+  download_feed(url, destfile)
+
+  # Read it
+  string_size <- file.info(destfile)$size
+  feed_str <- readChar(destfile, string_size)
+
+  # Delete the file
+  if (clean) { unlink(destfile) }
+
+  # Return the content as a string
+  return(feed_str)
+}
+
 #' Get blogs tree set
 #'
 #' Each blog is coded as a subtree
 #'
-#' @param source The rss feed location
+#' @param source The rss feed content or location
 #' @param query The xpath query
 #'
 #' @return An xml_nodeset object
@@ -24,7 +48,7 @@ download_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='d
 #' @export
 #'
 #' @examples
-get_blogs_set <- function(source='data/feed.xml', query='.//channel/item') {
+get_blogs_set <- function(source=get_feed(), query='.//channel/item') {
   source |> read_xml() |> xml_find_all(query) -> nodeSet
   return(nodeSet)
 }
@@ -65,7 +89,7 @@ simplify_id <- function(string) {
 #' @export
 #'
 #' @examples
-blogs_set_as_df <- function(blogs_set, collapse=" ") {
+blogs_set_as_df <- function(blogs_set=get_blogs_set(), collapse=" ") {
 
   nblogs <- length(blogs_set) # Count blogs
   df <- data.frame() # Initialize data frame...

@@ -12,12 +12,10 @@ library(mediumstats)
 
 
 ```{r rss}
-filename <- '../data/temp.xml'
-download_feed(destfile = filename)
-nodeSet <- get_blogs_set(source = filename)
-
 # Build data frame
-df <- blogs_set_as_df(nodeSet)
+get_feed(destfile = '../data/temp.xml') |> 
+  get_blogs_set() |> 
+  blogs_set_as_df() -> df
 
 print(df)
 ```
