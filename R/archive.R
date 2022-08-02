@@ -20,6 +20,7 @@ update_labels_archive <- function(inspect=FALSE) {
 
   # Merge all information
   updated <- unique(rbind(current, past))
+  rownames(updated) <- NULL
 
   # Show or save again
   if (inspect) { # This is useful for debug
