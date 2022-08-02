@@ -6,7 +6,7 @@ Author: Pablo Rodríguez-Sánchez
 Maintainer: Pablo Rodríguez-Sánchez <pablo.rodriguez.sanchez@esciencencenter.nl>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
