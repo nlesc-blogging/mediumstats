@@ -1,19 +1,3 @@
-#' Auxiliary function
-#'
-#' @param loc
-#' @param sep
-#' @param old_id
-#' @param new_id
-#'
-#' @return
-#'
-read_and_clean_csv <- function(loc, sep, old_id, new_id='id') {
-  data <- read.csv(loc, sep = sep)
-  names(data)[names(data) == old_id] <- new_id # Rename index column
-
-  return(data)
-}
-
 #' Get statistics from Medium Statistics Grabber file
 #'
 #' @param loc File location
@@ -36,4 +20,26 @@ get_msg_stats <- function(loc = 'data/msg.csv') {
 #' @examples
 get_mes_stats <- function(loc = 'data/mes.csv') {
   read_and_clean_csv(loc, ';', 'postId')
+}
+
+# ========== Auxiliary functions ==========
+
+#' Auxiliary function
+#'
+#' This function reads a csv and modifies its id column name
+#'
+#' @param loc File location
+#' @param sep Separator
+#' @param old_id Old id
+#' @param new_id New id
+#'
+#' @importFrom utils read.csv
+#'
+#' @return
+#'
+read_and_clean_csv <- function(loc, sep, old_id, new_id='id') {
+  data <- read.csv(loc, sep = sep)
+  names(data)[names(data) == old_id] <- new_id # Rename index column
+
+  return(data)
 }

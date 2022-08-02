@@ -39,7 +39,7 @@ get_blogs_set <- function(source=get_feed(), query='.//channel/item') {
 #'
 #' @return The value(s) corresponding to the key
 #'
-#' @import xml2 xml_find_all xml_text
+#' @importFrom xml2 xml_find_all xml_text
 #' @export
 #'
 #' @examples
@@ -96,6 +96,7 @@ simplify_id <- function(string) {
 #' @param destfile The destination file
 #'
 #' @return Nothing, but downloads the file
+#' @importFrom utils download.file
 #' @export
 #'
 #' @examples
