@@ -1,16 +1,3 @@
-#' Download the online feed and make a local copy
-#'
-#' @param url The url containing the feed
-#' @param destfile The destination file
-#'
-#' @return Nothing, but downloads the file
-#' @export
-#'
-#' @examples
-download_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='data/temp.xml') {
-  download.file(url = url, destfile = destfile)
-}
-
 #' Get the online feed
 #'
 #' @param url The url containing the feed
@@ -61,17 +48,6 @@ get_values <- function(node, key) {
   return(values)
 }
 
-#' Simplify medium id
-#'
-#' @param string The medium id, typically: https://medium.com/p/<simple id>
-#'
-#' @return A simplified id
-#'
-#' @examples
-simplify_id <- function(string) {
-  gsub('https://medium.com/p/', '', string)
-}
-
 #' Convert a blogs set into a data frame
 #'
 #' @param blogs_set A blogs set object
@@ -99,4 +75,30 @@ blogs_set_as_df <- function(blogs_set=get_blogs_set(), collapse=" ") {
   }
 
   return(df)
+}
+
+# ========== Auxiliary functions ==========
+
+#' Simplify medium id
+#'
+#' @param string The medium id, typically: https://medium.com/p/<simple id>
+#'
+#' @return A simplified id
+#'
+#' @examples
+simplify_id <- function(string) {
+  gsub('https://medium.com/p/', '', string)
+}
+
+#' Download the online feed and make a local copy
+#'
+#' @param url The url containing the feed
+#' @param destfile The destination file
+#'
+#' @return Nothing, but downloads the file
+#' @export
+#'
+#' @examples
+download_feed <- function(url='https://blog.esciencecenter.nl/feed', destfile='data/temp.xml') {
+  download.file(url = url, destfile = destfile)
 }
