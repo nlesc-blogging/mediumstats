@@ -5,27 +5,38 @@ date: '2022-07-22'
 output: html_document
 ---
 
+# Technical part
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(mediumstats)
 ```
 
+# Get labels
+
+Retrieve the list of blog labels:
 
 ```{r rss}
-# Build data frame
-df <- blogs_set_as_df()
+labels <- labels_archive
 
-print(df)
+# It is advisable to run update_labels_archive() every now and then.
+# This updates labels_archive with the latest information from the feed.
+#
+# labels_archive is shipped as data with the package itself, so it is
+# advisable to push the changes after a local update succeeds.
 ```
+
+## Read statistics
 
 ```{r stats}
-mes <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
-msg <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
+#stats <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
+stats <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
 ```
 
-```{r merge-mes}
-merge(df, mes, by = 'id', all = TRUE)
+## Combine labels and statistics
+
+```{r merge}
+stats_no_title <- subset(stats, select = -c(title)) # Avoid duplicated titles
+merge(labels, stats_no_title, by = 'id', all = TRUE)
 ```
-```{r merge-msg}
-merge(df, msg, by = 'id', all = TRUE)
-```
+
