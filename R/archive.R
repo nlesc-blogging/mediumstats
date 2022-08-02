@@ -11,7 +11,7 @@
 #' @return Nothing. Updates the labels_archive file
 #' @export
 #'
-update_labels_archive <- function(inspect=FALSE) {
+update_labels_archive <- function() {
 
   # Read labels from last time the file was generated
   past <- labels_archive
@@ -22,11 +22,12 @@ update_labels_archive <- function(inspect=FALSE) {
   updated <- unique(rbind(current, past))
   rownames(updated) <- NULL
 
-  # Show or save again
-  if (inspect) { # This is useful for debug
-    return(updated)
-  } else { # This is the default behaviour
+  # Update the file only if needed
+  if(nrow(updated) != nrow(past)) {
     labels_archive <- updated
     save(labels_archive, file = 'data/labels_archive.rda')
+  } else {
+    print("Labels archive is already up-to-date. Exiting.")
   }
+
 }
