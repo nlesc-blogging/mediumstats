@@ -30,8 +30,7 @@ stats <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
 ## Combine labels and statistics
 
 ```{r merge}
-stats_no_title <- subset(stats, select = -c(title)) # Avoid duplicated titles
-data <- merge(labels, stats_no_title, by = 'id', all = TRUE)
+data <- merge(labels, stats, by = c('id', 'title'), all = TRUE)
 ```
 
 
