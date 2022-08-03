@@ -23,14 +23,14 @@ labels <- update_labels_archive()
 ## Read statistics
 
 ```{r stats}
-stats <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
-#stats <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
+#stats <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
+stats <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
 ```
 
 ## Combine labels and statistics
 
 ```{r merge}
-data <- merge(labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE)
+data <- merge(labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE) |> mutate(pubDate = as_datetime(pubDate))
 ```
 
 

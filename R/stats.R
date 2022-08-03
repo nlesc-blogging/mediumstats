@@ -3,11 +3,15 @@
 #' @param loc File location
 #'
 #' @return
+#' @importFrom dplyr mutate
+#' @importFrom lubridate as_datetime
 #' @export
 #'
 #' @examples
 get_msg_stats <- function(loc = 'data/msg.csv') {
-  read_and_clean_csv(loc, '|', 'mediumID')
+  raw <- read_and_clean_csv(loc, '|', 'mediumID')
+  tid <- mutate(raw, pubDate = as_datetime(pubDate))
+  return(tid)
 }
 
 #' Get statistics from Medium Enhanced Statistics file
