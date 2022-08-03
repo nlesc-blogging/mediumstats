@@ -30,7 +30,7 @@ stats <- get_mes_stats('../data/mes.csv') # With Medium enhanced stats
 ## Combine labels and statistics
 
 ```{r merge}
-data <- merge(labels, stats, by = c('id', 'title'), all = TRUE)
+data <- merge(labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE)
 ```
 
 

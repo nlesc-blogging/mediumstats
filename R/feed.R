@@ -54,6 +54,8 @@ get_values <- function(node, key) {
 #' @param collapse Collapse symbol for pasting lists of strings
 #'
 #' @return An R-friendly data frame
+#'
+#' @importFrom lubridate dmy_hms as_datetime
 #' @export
 #'
 #' @examples
@@ -65,13 +67,15 @@ blogs_set_as_df <- function(blogs_set=get_blogs_set(), collapse=" ") {
     blog <- blogs_set[[i]]
     blog |> get_values('title') -> title
     blog |> get_values('guid') |> simplify_id()-> guid
+    blog |> get_values('pubDate') |> dmy_hms() |> as_datetime() -> pubDate
 
     # Category returns a list. We turn it into a string
     blog |> get_values('category') |> paste(collapse = collapse) -> category
 
     df <- rbind(df, list(id = guid,
                          title = title,
-                         category = category))
+                         category = category,
+                         pubDate = pubDate))
   }
 
   return(df)

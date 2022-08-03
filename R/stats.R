@@ -15,11 +15,16 @@ get_msg_stats <- function(loc = 'data/msg.csv') {
 #' @param loc File location
 #'
 #' @return
+#' @importFrom dplyr mutate
+#' @importFrom lubridate as_datetime
 #' @export
 #'
 #' @examples
 get_mes_stats <- function(loc = 'data/mes.csv') {
-  read_and_clean_csv(loc, ';', 'postId')
+  raw <- read_and_clean_csv(loc, ';', 'postId')
+  tid <- mutate(raw, pubDate = as_datetime(firstPublishedAt / 1000))
+  tid <- select(tid, -c('firstPublishedAt'))
+  return(tid)
 }
 
 # ========== Auxiliary functions ==========
