@@ -17,3 +17,28 @@ merge_labels_and_stats <- function(labels, stats) {
 
   return(data)
 }
+
+#' Filter by category
+#'
+#' @param data A dataframe containing category strings
+#' @param prompt The desired category
+#'
+#' @return The filtered dataframe
+#' @export
+#'
+#' @examples
+filter_by_category <- function(data, prompt) {
+
+  # Auxiliary predicate function
+  #
+  # Returns TRUE if the prompt exists in the list of categories
+  predicate <- function(categories_str, prompt) {
+    categories <- strsplit(categories_str, " ")[[1]]
+    return(prompt %in% categories)
+  }
+
+  # Apply to all rows
+  selector <- unlist(lapply(data$category, function(x) predicate(x, prompt)))
+
+  return(data[selector, ])
+}

@@ -33,4 +33,10 @@ stats <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
 data <- merge_labels_and_stats(labels, stats)
 ```
 
+## Filter by topic
 
+```{r filter}
+prompt <- 'machine-learning'
+
+filter_by_category(data, prompt)
+```

@@ -2,6 +2,7 @@
 
 export(blogs_set_as_df)
 export(download_feed)
+export(filter_by_category)
 export(get_blogs_set)
 export(get_feed)
 export(get_mes_stats)
