@@ -26,8 +26,10 @@ update_labels_archive <- function() {
   if(nrow(updated) != nrow(past)) {
     labels_archive <- updated
     save(labels_archive, file = 'data/labels_archive.rda')
+    warning("Labels archive has been updated.\nPlease, commit and push the changes in data/labels_archive.rda")
   } else {
-    print("Labels archive is already up-to-date. Exiting.")
+    message("Labels archive is already up-to-date. Exiting.")
   }
 
+  return(updated)
 }
