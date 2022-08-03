@@ -30,7 +30,7 @@ stats <- get_msg_stats('../data/msg.csv') # With Medium stats grabber
 ## Combine labels and statistics
 
 ```{r merge}
-data <- merge(labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE) |> mutate(pubDate = as_datetime(pubDate))
+data <- merge_labels_and_stats(labels, stats)
 ```
 
 
