@@ -59,7 +59,7 @@ get_values <- function(node, key) {
 #' @export
 #'
 #' @examples
-blogs_set_as_df <- function(blogs_set=get_blogs_set(), collapse=" ") {
+feed_as_df <- function(blogs_set=get_blogs_set(), collapse=" ") {
 
   nblogs <- length(blogs_set) # Count blogs
   df <- data.frame() # Initialize data frame...

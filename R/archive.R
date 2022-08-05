@@ -16,7 +16,7 @@ update_labels_archive <- function() {
   # Read labels from last time the file was generated
   past <- labels_archive
   # Read current labels
-  current <- blogs_set_as_df()
+  current <- feed_as_df()
 
   # Merge all information
   updated <- unique(rbind(current, past))

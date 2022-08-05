@@ -10,7 +10,7 @@ test_that("The feed is properly parsed as an xml_nodeset object", {
 })
 
 test_that("The feed gets properly translated to a data frame", {
-  df <- blogs_set_as_df(set)
+  df <- feed_as_df(set)
   expected_cols <- c("id", "title", "category")
   expect_true(all(expected_cols %in% colnames(df)))
 })
