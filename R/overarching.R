@@ -11,8 +11,8 @@
 #'
 #' @examples
 merge_labels_and_stats <- function(labels, stats) {
-  merge(labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE) |>
-  mutate(pubDate = as_datetime(pubDate)) |>
+  patched_labels <- mutate(labels, pubDate = as_datetime(pubDate)) #TODO: figure out why this is not happening already
+  merge(patched_labels, stats, by = c('id', 'title', 'pubDate'), all = TRUE) |>
   arrange(desc(pubDate)) -> data
 
   return(data)
